@@ -1,0 +1,68 @@
+{
+  "name": "shift-hero",
+  "version": "1.0.0",
+  "description": "Enterprise NHS Care Management Platform - Revolutionizing care home management through intelligent automation, real-time compliance monitoring, and AI-powered workforce optimization",
+  "private": true,
+  "keywords": [
+    "nhs",
+    "healthcare",
+    "care-homes",
+    "staff-scheduling",
+    "cqc-compliance",
+    "medication-management",
+    "ai-scheduling",
+    "healthcare-technology",
+    "enterprise",
+    "digital-health",
+    "healthcare-analytics",
+    "workforce-optimization",
+    "regulatory-compliance",
+    "patient-care",
+    "healthcare-automation"
+  ],
+  "author": "NOVUMSOLVO Ltd <contact@novumsolvo.com>",
+  "license": "PROPRIETARY",
+  "homepage": "https://novumsolvo.com/shift-hero",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NOVUMSOLVO/Shift-Hero.git"
+  },
+  "bugs": {
+    "url": "https://github.com/NOVUMSOLVO/Shift-Hero/issues",
+    "email": "support@novumsolvo.com"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "scripts": {
+    "install:all": "npm run install:backend && npm run install:frontend && npm run install:ai",
+    "install:backend": "cd nhs-care-homes-app/backend && npm install",
+    "install:frontend": "cd nhs-care-homes-app/frontend && npm install", 
+    "install:ai": "cd nhs-care-homes-app/ai-scheduling && pip install -r requirements.txt",
+    "dev": "npm run dev:backend & npm run dev:frontend",
+    "dev:backend": "cd nhs-care-homes-app/backend && npm run dev",
+    "dev:frontend": "cd nhs-care-homes-app/frontend && npm run dev",
+    "start": "npm run start:backend & npm run start:frontend",
+    "start:backend": "cd nhs-care-homes-app/backend && npm start",
+    "start:frontend": "cd nhs-care-homes-app/frontend && npm start",
+    "test": "npm run test:backend && npm run test:frontend",
+    "test:backend": "cd nhs-care-homes-app/backend && npm test",
+    "test:frontend": "cd nhs-care-homes-app/frontend && npm test",
+    "build": "npm run build:frontend",
+    "build:frontend": "cd nhs-care-homes-app/frontend && npm run build",
+    "docker:build": "cd nhs-care-homes-app && docker-compose build",
+    "docker:up": "cd nhs-care-homes-app && docker-compose up -d",
+    "docker:down": "cd nhs-care-homes-app && docker-compose down",
+    "migrate": "cd nhs-care-homes-app/backend && npm run migrate",
+    "seed": "cd nhs-care-homes-app/backend && npm run seed"
+  },
+  "workspaces": [
+    "nhs-care-homes-app/backend",
+    "nhs-care-homes-app/frontend"
+  ],
+  "funding": {
+    "type": "private",
+    "url": "https://novumsolvo.com/contact"
+  }
+}
