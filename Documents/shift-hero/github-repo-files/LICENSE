@@ -1,0 +1,135 @@
+NOVUMSOLVO PROPRIETARY SOFTWARE LICENSE
+
+Copyright (c) 2024 NOVUMSOLVO Limited. All rights reserved.
+
+IMPORTANT: READ THIS LICENSE AGREEMENT CAREFULLY BEFORE ACCESSING, DOWNLOADING, INSTALLING, OR USING THE SOFTWARE.
+
+BY ACCESSING, DOWNLOADING, INSTALLING, OR USING THE SOFTWARE, YOU ACKNOWLEDGE THAT YOU HAVE READ THIS LICENSE AGREEMENT, UNDERSTAND IT, AND AGREE TO BE BOUND BY ITS TERMS AND CONDITIONS.
+
+IF YOU DO NOT AGREE TO THE TERMS OF THIS LICENSE AGREEMENT, DO NOT ACCESS, DOWNLOAD, INSTALL, OR USE THE SOFTWARE.
+
+1. DEFINITIONS
+
+"Software" means the Shift-Hero platform, including all source code, object code, documentation, algorithms, proprietary methodologies, machine learning models, databases, user interfaces, and any updates, modifications, or enhancements thereto.
+
+"NOVUMSOLVO" refers to NOVUMSOLVO Limited, a company incorporated in England and Wales.
+
+"Licensee" means any individual or entity that accesses or uses the Software.
+
+"Confidential Information" includes all non-public information related to the Software, including but not limited to source code, algorithms, business processes, technical specifications, and trade secrets.
+
+2. GRANT OF LICENSE
+
+Subject to the terms and conditions of this Agreement, NOVUMSOLVO grants Licensee a limited, non-exclusive, non-transferable, revocable license to view the publicly available portions of this repository for evaluation purposes only.
+
+This license does NOT grant any rights to:
+- Use, copy, modify, distribute, or create derivative works of the Software
+- Access any non-public portions of the Software
+- Reverse engineer, decompile, or disassemble the Software
+- Remove or alter any proprietary notices or labels
+
+3. RESTRICTIONS
+
+Licensee shall NOT:
+a) Use the Software for any commercial purpose without a separate written agreement
+b) Copy, reproduce, distribute, or transmit the Software in any form
+c) Modify, adapt, alter, translate, or create derivative works of the Software
+d) Reverse engineer, decompile, disassemble, or attempt to derive source code
+e) Rent, lease, lend, sell, sublicense, or transfer the Software
+f) Remove, alter, or obscure any proprietary notices, labels, or marks
+g) Use the Software to compete with NOVUMSOLVO or develop competing products
+h) Share access credentials or allow unauthorized access to the Software
+i) Circumvent any security measures or access controls
+j) Extract, harvest, or mine data from the Software
+
+4. INTELLECTUAL PROPERTY RIGHTS
+
+The Software contains proprietary and confidential information that is protected by applicable intellectual property and other laws, including but not limited to:
+- Copyright laws
+- Trade secret laws
+- Patent rights (pending and granted)
+- Trademark rights
+- Database rights
+
+All rights, title, and interest in and to the Software remain exclusively with NOVUMSOLVO. This Agreement does not grant Licensee any rights to NOVUMSOLVO's trademarks, service marks, or logos.
+
+5. CONFIDENTIALITY
+
+Licensee acknowledges that the Software contains valuable trade secrets and confidential information of NOVUMSOLVO. Licensee agrees to:
+a) Maintain the confidentiality of all Confidential Information
+b) Not disclose Confidential Information to any third party
+c) Use Confidential Information solely for the permitted evaluation purposes
+d) Take reasonable measures to protect the confidentiality of the information
+
+6. NO WARRANTY
+
+THE SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND. NOVUMSOLVO DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO:
+- WARRANTIES OF MERCHANTABILITY
+- FITNESS FOR A PARTICULAR PURPOSE
+- NON-INFRINGEMENT
+- TITLE
+- ACCURACY OR COMPLETENESS
+
+7. LIMITATION OF LIABILITY
+
+IN NO EVENT SHALL NOVUMSOLVO BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING BUT NOT LIMITED TO:
+- LOST PROFITS OR REVENUE
+- BUSINESS INTERRUPTION
+- DATA LOSS OR CORRUPTION
+- COST OF SUBSTITUTE GOODS OR SERVICES
+
+THIS LIMITATION APPLIES REGARDLESS OF THE LEGAL THEORY OF LIABILITY AND EVEN IF NOVUMSOLVO HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+8. TERMINATION
+
+This license terminates automatically if Licensee breaches any term of this Agreement. Upon termination, Licensee must:
+a) Immediately cease all use of the Software
+b) Delete all copies of the Software and Confidential Information
+c) Return or destroy all materials containing Confidential Information
+
+NOVUMSOLVO may also terminate this license at any time with or without cause by providing written notice to Licensee.
+
+9. ENFORCEMENT
+
+Licensee acknowledges that any breach of this Agreement may cause irreparable harm to NOVUMSOLVO for which monetary damages would be inadequate. Therefore, NOVUMSOLVO is entitled to seek:
+a) Immediate injunctive relief
+b) Specific performance
+c) Attorney's fees and costs
+d) All other remedies available at law or equity
+
+10. COMPLIANCE WITH LAWS
+
+Licensee agrees to comply with all applicable laws and regulations, including but not limited to:
+- Export control laws
+- Data protection regulations (GDPR, UK GDPR)
+- Healthcare regulations (NHS standards, CQC requirements)
+- Cybersecurity frameworks
+
+11. GOVERNING LAW
+
+This Agreement is governed by the laws of England and Wales, without regard to conflict of law principles. Any disputes arising under this Agreement shall be subject to the exclusive jurisdiction of the courts of England and Wales.
+
+12. ENTIRE AGREEMENT
+
+This Agreement constitutes the entire agreement between the parties concerning the Software and supersedes all prior or contemporaneous agreements, whether written or oral.
+
+13. SEVERABILITY
+
+If any provision of this Agreement is held to be invalid or unenforceable, the remaining provisions shall remain in full force and effect.
+
+14. NO WAIVER
+
+The failure of NOVUMSOLVO to enforce any provision of this Agreement shall not constitute a waiver of such provision or the right to enforce it.
+
+15. CONTACT INFORMATION
+
+For licensing inquiries, please contact:
+NOVUMSOLVO Limited
+Email: legal@novumsolvo.com
+Phone: +44 (0) 203 051 9000
+
+ACKNOWLEDGMENT
+
+BY ACCESSING OR USING THE SOFTWARE, LICENSEE ACKNOWLEDGES THAT THEY HAVE READ, UNDERSTOOD, AND AGREE TO BE BOUND BY THE TERMS OF THIS AGREEMENT.
+
+Last Updated: December 2024

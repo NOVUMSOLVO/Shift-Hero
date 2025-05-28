@@ -1,0 +1,13 @@
+{
+  "generatedAt": "2025-05-01T19:29:56.456Z",
+  "dateRange": {
+    "from": "2025-04-01T19:29:55.682Z",
+    "to": "2025-05-01T19:29:55.682Z"
+  },
+  "summary": {
+    "totalApiCalls": 0,
+    "errorCount": 0,
+    "errorRate": "0%",
+    "complianceStatus": "COMPLIANT"
+  }
+}
