@@ -1,0 +1,445 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://valentinechideme:@localhost:5432/rxautomate?schema=public"
+}
+
+// Organization model (for multi-tenancy)
+model Organization {
+  id                String              @id @default(uuid())
+  name              String
+  slug              String              @unique
+  logo              String?
+  primaryColor      String?             @default("#005EB8") // Default NHS blue
+  secondaryColor    String?             @default("#003087") // Default NHS dark blue
+  contactEmail      String
+  contactPhone      String?
+  address           String?
+  postcode          String?
+  subscriptionTier  SubscriptionTier    @default(BASIC)
+  subscriptionStatus SubscriptionStatus @default(ACTIVE)
+  subscriptionExpiry DateTime?
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  pharmacies        Pharmacy[]
+  users             User[]
+}
+
+// Pharmacy model
+model Pharmacy {
+  id                String              @id @default(uuid())
+  name              String
+  slug              String
+  address           String
+  postcode          String
+  phoneNumber       String
+  email             String
+  nhsContractNumber String?
+  isActive          Boolean             @default(true)
+  organizationId    String
+  organization      Organization        @relation(fields: [organizationId], references: [id])
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  patients          Patient[]
+  prescriptions     Prescription[]
+  inventory         InventoryItem[]
+  appointments      Appointment[]
+  consents          Consent[]
+  transactions      Transaction[]
+  integrations      PharmacyIntegration[]
+  users             UserPharmacy[]
+
+  @@unique([organizationId, slug])
+  @@unique([organizationId, email])
+}
+
+// Patient model
+model Patient {
+  id                String         @id @default(uuid())
+  nhsNumber         String?
+  title             String?
+  firstName         String
+  lastName          String
+  dateOfBirth       DateTime
+  address           String
+  postcode          String
+  phoneNumber       String?
+  email             String?
+  exemptionStatus   String?
+  exemptionEndDate  DateTime?
+  isActive          Boolean        @default(true)
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime       @updatedAt
+  pharmacyId        String
+  pharmacy          Pharmacy       @relation(fields: [pharmacyId], references: [id])
+  prescriptions     Prescription[]
+  appointments      Appointment[]
+  consents          Consent[]
+  adherence         PatientAdherence?
+  medicationAdherence MedicationAdherence[]
+  adherenceInterventions AdherenceIntervention[]
+  notifications     PatientNotification[]
+
+  @@unique([pharmacyId, nhsNumber])
+  @@index([pharmacyId, lastName, firstName])
+}
+
+// Prescription model
+model Prescription {
+  id                String            @id @default(uuid())
+  prescriptionType  PrescriptionType
+  prescriptionNumber String?          @unique
+  issuedDate        DateTime
+  expiryDate        DateTime?
+  status            PrescriptionStatus
+  items             PrescriptionItem[]
+  patientId         String
+  patient           Patient           @relation(fields: [patientId], references: [id])
+  pharmacyId        String
+  pharmacy          Pharmacy          @relation(fields: [pharmacyId], references: [id])
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  transactions      Transaction[]
+}
+
+// Prescription Item model
+model PrescriptionItem {
+  id                String       @id @default(uuid())
+  medicationName    String
+  dosage            String
+  quantity          Int
+  instructions      String
+  prescriptionId    String
+  prescription      Prescription @relation(fields: [prescriptionId], references: [id])
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+}
+
+// Inventory Item model
+model InventoryItem {
+  id                String       @id @default(uuid())
+  productCode       String
+  name              String
+  description       String?
+  category          String
+  supplier          String?
+  currentStock      Int
+  reorderLevel      Int
+  reorderQuantity   Int
+  unitPrice         Float
+  pharmacyId        String
+  pharmacy          Pharmacy     @relation(fields: [pharmacyId], references: [id])
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+}
+
+// Appointment model
+model Appointment {
+  id                String           @id @default(uuid())
+  appointmentType   AppointmentType
+  date              DateTime
+  status            AppointmentStatus
+  notes             String?
+  patientId         String
+  patient           Patient          @relation(fields: [patientId], references: [id])
+  pharmacyId        String
+  pharmacy          Pharmacy         @relation(fields: [pharmacyId], references: [id])
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+}
+
+// Consent model
+model Consent {
+  id                String       @id @default(uuid())
+  consentType       ConsentType
+  consentGiven      Boolean
+  consentDate       DateTime
+  expiryDate        DateTime?
+  patientId         String
+  patient           Patient      @relation(fields: [patientId], references: [id])
+  pharmacyId        String
+  pharmacy          Pharmacy     @relation(fields: [pharmacyId], references: [id])
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+}
+
+// Transaction model
+model Transaction {
+  id                String           @id @default(uuid())
+  transactionType   TransactionType
+  amount            Float
+  status            TransactionStatus
+  reference         String?
+  prescriptionId    String?
+  prescription      Prescription?    @relation(fields: [prescriptionId], references: [id])
+  pharmacyId        String
+  pharmacy          Pharmacy         @relation(fields: [pharmacyId], references: [id])
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+}
+
+// Pharmacy Integration model
+model PharmacyIntegration {
+  id                String              @id @default(uuid())
+  integrationType   IntegrationType
+  apiKey            String?
+  apiSecret         String?
+  accessToken       String?
+  refreshToken      String?
+  tokenExpiry       DateTime?
+  isActive          Boolean             @default(true)
+  pharmacyId        String
+  pharmacy          Pharmacy            @relation(fields: [pharmacyId], references: [id])
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+}
+
+// User model
+model User {
+  id                String              @id @default(uuid())
+  name              String
+  email             String              @unique
+  emailVerified     DateTime?
+  password          String?             // Hashed password
+  image             String?
+  role              UserRole            @default(PHARMACY_STAFF)
+  isActive          Boolean             @default(true)
+  lastLogin         DateTime?
+  organizationId    String?
+  organization      Organization?       @relation(fields: [organizationId], references: [id])
+  pharmacies        UserPharmacy[]
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  accounts          Account[]
+  sessions          Session[]
+}
+
+// User-Pharmacy relationship (many-to-many)
+model UserPharmacy {
+  userId            String
+  user              User                @relation(fields: [userId], references: [id])
+  pharmacyId        String
+  pharmacy          Pharmacy            @relation(fields: [pharmacyId], references: [id])
+  role              PharmacyRole        @default(STAFF)
+  assignedAt        DateTime            @default(now())
+  assignedBy        String?
+
+  @@id([userId, pharmacyId])
+}
+
+// NextAuth Account model
+model Account {
+  id                String              @id @default(uuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?             @db.Text
+  access_token      String?             @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?             @db.Text
+  session_state     String?
+  user              User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+// NextAuth Session model
+model Session {
+  id                String              @id @default(uuid())
+  sessionToken      String              @unique
+  userId            String
+  expires           DateTime
+  user              User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// NextAuth VerificationToken model
+model VerificationToken {
+  identifier        String
+  token             String              @unique
+  expires           DateTime
+
+  @@unique([identifier, token])
+}
+
+// Patient Adherence models
+model PatientAdherence {
+  id                String              @id @default(uuid())
+  patientId         String              @unique
+  patient           Patient             @relation(fields: [patientId], references: [id])
+  adherenceScore    Int                 // 0-100 scale
+  status            String              // OPTIMAL, GOOD, FAIR, POOR, UNKNOWN
+  trend             String              // IMPROVING, STABLE, DECLINING, UNKNOWN
+  lastCalculated    DateTime            @default(now())
+  medicationAdherence MedicationAdherence[]
+  interventions     AdherenceIntervention[]
+  
+  @@index([patientId])
+  @@index([status])
+}
+
+model MedicationAdherence {
+  id                String      @id @default(uuid())
+  patientId         String
+  patient           Patient     @relation(fields: [patientId], references: [id])
+  patientAdherence  PatientAdherence @relation(fields: [patientId], references: [patientId])
+  medicationName    String
+  adherenceScore    Int         // 0-100 scale
+  status            String      // OPTIMAL, GOOD, FAIR, POOR, UNKNOWN
+  lastFilled        DateTime?
+  nextDue           DateTime?
+  daysSupply        Int         @default(0)
+  
+  @@unique([patientId, medicationName])
+  @@index([patientId])
+  @@index([medicationName])
+}
+
+model AdherenceIntervention {
+  id                String      @id @default(uuid())
+  patientId         String
+  patient           Patient     @relation(fields: [patientId], references: [id])
+  patientAdherence  PatientAdherence @relation(fields: [patientId], references: [patientId])
+  type              String      // PHONE_CALL, SMS, EMAIL, IN_PERSON, etc.
+  notes             String
+  date              DateTime    @default(now())
+  userId            String      // User who performed the intervention
+  
+  @@index([patientId])
+  @@index([date])
+}
+
+model PatientNotification {
+  id                String      @id @default(uuid())
+  patientId         String
+  patient           Patient     @relation(fields: [patientId], references: [id])
+  type              String      // REFILL_REMINDER, ADHERENCE_ALERT, etc.
+  details           String      // JSON string with notification details
+  sentAt            DateTime    @default(now())
+  
+  @@index([patientId])
+  @@index([type])
+  @@index([sentAt])
+}
+
+// Enums
+enum UserRole {
+  SUPER_ADMIN       // Can manage all organizations and system settings
+  ORG_ADMIN         // Can manage their organization and all its pharmacies
+  PHARMACY_ADMIN    // Can manage a specific pharmacy
+  PHARMACY_STAFF    // Regular staff with limited permissions
+}
+
+enum PharmacyRole {
+  ADMIN             // Pharmacy administrator
+  PHARMACIST        // Qualified pharmacist
+  TECHNICIAN        // Pharmacy technician
+  STAFF             // General staff
+}
+
+enum SubscriptionTier {
+  BASIC             // Limited features
+  STANDARD          // Standard features
+  PREMIUM           // All features
+  ENTERPRISE        // Custom features and support
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  TRIAL
+  PAST_DUE
+  CANCELLED
+  EXPIRED
+}
+
+enum PrescriptionType {
+  NHS
+  PRIVATE
+  REPEAT
+  EMERGENCY
+}
+
+enum PrescriptionStatus {
+  PENDING
+  PROCESSING
+  DISPENSED
+  COLLECTED
+  CANCELLED
+  EXPIRED
+}
+
+enum AppointmentType {
+  FLU_VACCINATION
+  COVID_VACCINATION
+  MEDICATION_REVIEW
+  TRAVEL_CLINIC
+  OTHER
+}
+
+enum AppointmentStatus {
+  SCHEDULED
+  COMPLETED
+  CANCELLED
+  NO_SHOW
+}
+
+enum ConsentType {
+  MARKETING
+  REMINDER
+  DATA_SHARING
+  VACCINATION
+}
+
+enum TransactionType {
+  PRESCRIPTION_FEE
+  PRIVATE_SERVICE
+  VACCINATION
+  REFUND
+  OTHER
+}
+
+enum TransactionStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REFUNDED
+}
+
+enum IntegrationType {
+  NHS_SPINE
+  EPS
+  PHARMACY_SYSTEM
+  WHOLESALER
+  PAYMENT_PROVIDER
+  SMS_PROVIDER
+}
+
+// Audit Log model for tracking system activities
+model AuditLog {
+  id                String       @id @default(uuid())
+  action            String       // The action performed (e.g., GET_PATIENT, CHECK_EXEMPTION)
+  category          String       // The category of the action (e.g., NHS_API, PRESCRIPTION)
+  userId            String?      // The user who performed the action (if applicable)
+  patientId         String?      // The patient involved (if applicable)
+  nhsNumber         String?      // The NHS number involved (masked for privacy)
+  prescriptionId    String?      // The prescription involved (if applicable)
+  details           String?      // JSON string with additional details (sanitized)
+  ipAddress         String?      // IP address of the request (if applicable)
+  userAgent         String?      // User agent of the request (if applicable)
+  timestamp         DateTime     @default(now())
+
+  @@index([action])
+  @@index([category])
+  @@index([userId])
+  @@index([patientId])
+  @@index([prescriptionId])
+  @@index([timestamp])
+}
