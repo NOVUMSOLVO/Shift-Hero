@@ -1,0 +1,264 @@
+# Shift-Hero - Comprehensive .gitignore
+# Protects proprietary algorithms, credentials, and sensitive business logic
+
+# ================================
+# ENVIRONMENT & CONFIGURATION FILES
+# ================================
+.env
+.env.*
+!.env.example
+config/local.js
+config/production.js
+config/secrets.js
+**/config/database.js
+**/config/firebase-admin-key.json
+
+# ================================
+# DEPENDENCY DIRECTORIES
+# ================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+bower_components/
+jspm_packages/
+
+# ================================
+# BUILD & DISTRIBUTION FILES
+# ================================
+build/
+dist/
+out/
+.next/
+.nuxt/
+.vuepress/dist/
+.cache/
+.parcel-cache/
+
+# ================================
+# PROPRIETARY ALGORITHMS & MODELS
+# ================================
+# AI Scheduling Algorithms
+ai-scheduling/models/proprietary/
+ai-scheduling/algorithms/core/
+ai-scheduling/training-data/
+ai-scheduling/*.pkl
+ai-scheduling/*.joblib
+ai-scheduling/*.h5
+ai-scheduling/*.model
+
+# Machine Learning Models
+**/ml-models/
+**/trained-models/
+**/model-weights/
+**/training-datasets/
+
+# Proprietary Business Logic
+**/core-algorithms/
+**/business-logic/
+**/proprietary/
+**/competitive-advantage/
+
+# ================================
+# DATABASE & DATA FILES
+# ================================
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+database/*.sql
+database/backups/
+database/dumps/
+seeds/production/
+migrations/production/
+
+# Data exports and sensitive data
+data/
+exports/
+reports/
+*.csv
+*.xlsx
+patient-data/
+care-records/
+
+# ================================
+# AUTHENTICATION & SECURITY
+# ================================
+# API Keys and secrets
+**/api-keys/
+**/secrets/
+*.pem
+*.key
+*.crt
+*.p12
+private-keys/
+certificates/
+
+# Firebase credentials
+firebase-adminsdk-*.json
+serviceAccountKey.json
+google-services.json
+GoogleService-Info.plist
+
+# JWT and authentication
+jwt-secrets/
+auth-config/
+oauth-credentials/
+
+# ================================
+# NHS & HEALTHCARE SPECIFIC
+# ================================
+# NHS API configurations
+nhs-api-keys/
+nhs-mail-config/
+gp-connect-certs/
+fhir-credentials/
+
+# Patient data and PHI
+phi-data/
+patient-records/
+medical-data/
+nhs-numbers/
+care-plans/
+
+# CQC documentation
+cqc-reports/
+compliance-data/
+audit-trails/
+
+# ================================
+# LOGS & TEMPORARY FILES
+# ================================
+logs/
+*.log
+log/
+temp/
+tmp/
+cache/
+.cache/
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+.nyc_output/
+
+# ================================
+# IDE & EDITOR FILES
+# ================================
+.vscode/
+!.vscode/settings.json.example
+!.vscode/extensions.json.example
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ================================
+# DEPLOYMENT & DOCKER
+# ================================
+# Docker secrets
+docker-compose.override.yml
+docker-compose.production.yml
+Dockerfile.production
+.dockerignore.production
+
+# Kubernetes secrets
+k8s-secrets/
+helm-values/
+deployment-configs/
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+terraform.tfvars
+
+# ================================
+# TESTING & DEVELOPMENT
+# ================================
+# Test results and coverage
+test-results/
+coverage/
+.nyc_output/
+junit.xml
+
+# Development tools
+.grunt/
+.sass-cache/
+.eslintcache
+.stylelintcache
+
+# ================================
+# BUSINESS INTELLIGENCE
+# ================================
+# Analytics and reporting
+analytics-data/
+business-metrics/
+performance-data/
+kpi-reports/
+
+# Proprietary dashboards
+dashboard-configs/
+custom-reports/
+bi-templates/
+
+# ================================
+# BACKUP & ARCHIVE FILES
+# ================================
+*.backup
+*.bak
+*.old
+*.orig
+archive/
+backups/
+
+# ================================
+# PLATFORM SPECIFIC
+# ================================
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+
+# ================================
+# CUSTOM NOVUMSOLVO EXCLUSIONS
+# ================================
+# Internal documentation
+internal-docs/
+company-docs/
+proprietary-docs/
+
+# Client-specific configurations
+clients/
+customer-configs/
+tenant-configs/
+
+# Revenue and pricing data
+pricing-models/
+revenue-data/
+subscription-analytics/
+
+# Competitive analysis
+competitive-intelligence/
+market-research/
+strategy-docs/

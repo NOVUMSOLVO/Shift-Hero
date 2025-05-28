@@ -1,0 +1,55 @@
+name: Bug Report
+description: Report a bug or issue with Shift-Hero
+title: "[BUG] "
+labels: ["bug", "triage"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **⚠️ Security Notice**: If this is a security vulnerability, please follow our [Security Policy](../SECURITY.md) instead.
+
+  - type: checkboxes
+    id: prerequisites
+    attributes:
+      label: Prerequisites
+      options:
+        - label: I have searched existing issues
+          required: true
+        - label: I have verified this bug exists in the latest version
+          required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Shift-Hero Version
+      placeholder: "e.g., 2.1.0"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      placeholder: "Describe what happened"
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      placeholder: |
+        1. Navigate to '...'
+        2. Click on '...'
+        3. See error
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: data_safety
+    attributes:
+      label: Data Safety
+      options:
+        - label: I have NOT included any patient data or sensitive information
+          required: true
